@@ -20,7 +20,7 @@ export function AuthProvider({ children }) {
     
     async function checkSession() {
       try {
-        const response = await fetch(`${API_URL}/me`, {
+        let response = await fetch(`${API_URL}/me`, {
           method: "GET",
           credentials: "include",
         });
