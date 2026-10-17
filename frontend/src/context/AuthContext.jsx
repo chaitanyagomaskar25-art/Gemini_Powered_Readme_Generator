@@ -8,7 +8,7 @@ import {
 
 export const AuthContext = createContext(null);
 
-const API_URL = "http://localhost:3000/api/auth";
+const API_URL = "https://gemini-powered-readme-generator.vercel.app/api/auth";
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);

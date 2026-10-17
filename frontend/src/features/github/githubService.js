@@ -1,7 +1,7 @@
-const API_URL = "http://localhost:3000";
+const API_URL = "https://gemini-powered-readme-generator.vercel.app/api/github";
 
 export async function importGitHubRepository(repositoryUrl) {
-  const response = await fetch(`${API_URL}/api/github/import`, {
+  const response = await fetch(`${API_URL}/import`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export async function saveGitHubReadme(
   branch,
 ) {
   const response = await fetch(
-    `${API_URL}/api/github/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/readme`,
+    `${API_URL}/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/readme`,
     {
       method: "PUT",
       headers: {
