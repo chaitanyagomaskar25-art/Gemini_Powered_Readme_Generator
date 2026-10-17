@@ -1,4 +1,4 @@
-const API_URL = "https://gemini-powered-readme-generator.vercel.app/api/github";
+const API_URL = "https://gemini-powered-readme-generator-ujr.vercel.app/api/github";
 
 export async function importGitHubRepository(repositoryUrl) {
   const response = await fetch(`${API_URL}/import`, {

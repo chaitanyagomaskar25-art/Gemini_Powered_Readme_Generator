@@ -1,4 +1,4 @@
-const API_URL = "https://gemini-powered-readme-generator.vercel.app/readme";
+const API_URL = "https://gemini-powered-readme-generator-ujr.vercel.app/readme";
 
 export const readmeService = {
   async generateReadme(projectDetails) {
