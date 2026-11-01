@@ -8,7 +8,8 @@ import {
 
 export const AuthContext = createContext(null);
 
-const API_URL = "https://gemini-powered-readme-generator-wra.vercel.app/api/auth";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_URL = `${API_BASE}/api/auth`;
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);

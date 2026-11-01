@@ -35,10 +35,12 @@ export const refreshTokenAccess = async (req, res) => {
       { expiresIn: "15m" },
     );
     
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.cookie("access_token", newAccessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "lax",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       path: "/",
       maxAge: 15 * 60 * 1000,
     });

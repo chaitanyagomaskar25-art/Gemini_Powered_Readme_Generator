@@ -16,17 +16,35 @@ app.use(express.json());
 app.use(cookieParser());
 
 const allowedOrigins = [
+  process.env.FRONTEND_URL,
   "https://gemini-powered-readme-generator.vercel.app",
+  "https://gemini-powered-readme-generator-wra.vercel.app",
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
-];
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  }),
-);
+].filter(Boolean);
+const corsOptions = {
+  origin(origin, callback) {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (
+      allowedOrigins.includes(origin) ||
+      /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(origin)
+    ) {
+      return callback(null, true);
+    }
+
+    return callback(new Error("Not allowed by CORS"));
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
+connectBD();
+
 
 app.get("/", (req, res) => {
   res.json({
@@ -39,8 +57,7 @@ app.use("/api/projects", projectRoute);
 app.use("/api/readme", readmeRoute);
 app.use("/api/github", router);
 
-connectBD();
 
 app.listen(3000, () => {
-  console.log("Server is running on https://gemini-powered-readme-generator-wra.vercel.app");
+  console.log("Server is running on http://localhost:3000");
 });

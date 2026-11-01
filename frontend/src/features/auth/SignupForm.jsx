@@ -11,6 +11,8 @@ import {
 import { useForm } from "react-hook-form";
 import Button from "../../components/Button";
 
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
 export default function SignupForm() {
   const navigate = useNavigate();
 
@@ -34,7 +36,7 @@ export default function SignupForm() {
 
     try {
       const response = await fetch(
-       "https://gemini-powered-readme-generator-wra.vercel.app/api/auth/register",
+        `${API_BASE}/api/auth/register`,
         {
           method: "POST",
           headers: {

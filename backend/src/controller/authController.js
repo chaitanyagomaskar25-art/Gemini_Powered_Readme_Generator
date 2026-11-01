@@ -101,19 +101,21 @@ export const loginUser = async (req, res) => {
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     });
 
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.cookie("refresh_token", refresh_token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "lax",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
       path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.cookie("access_token", access_token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "lax",
-      path: "/",
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
+      path: "/", 
       maxAge: 15 * 60 * 1000,
     });
 
@@ -171,8 +173,20 @@ export const signOut = async (req, res) => {
       );
     }
 
-    res.clearCookie("refresh_token");
-    res.clearCookie("access_token")
+    const isProduction = process.env.NODE_ENV === "production";
+
+    res.clearCookie("refresh_token", {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
+      path: "/",
+    });
+    res.clearCookie("access_token", {
+      httpOnly: true,
+      secure: isProduction,
+      sameSite: isProduction ? "none" : "lax",
+      path: "/",
+    });
     res.status(200).json({
       message: "Logout successful",
     });

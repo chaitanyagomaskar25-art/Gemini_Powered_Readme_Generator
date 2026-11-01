@@ -1,4 +1,5 @@
-const API_URL = "https://gemini-powered-readme-generator-wra.vercel.app/api/github";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+const API_URL = `${API_BASE}/api/github`;
 
 export async function importGitHubRepository(repositoryUrl) {
   const response = await fetch(`${API_URL}/import`, {
