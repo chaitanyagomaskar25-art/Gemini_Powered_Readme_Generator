@@ -115,7 +115,7 @@ export const loginUser = async (req, res) => {
       httpOnly: true,
       secure: isProduction,
       sameSite: isProduction ? "none" : "lax",
-      path: "/", 
+      path: "/",
       maxAge: 15 * 60 * 1000,
     });
 
@@ -129,7 +129,8 @@ export const loginUser = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({
+    console.log(error);
+    return res.status(500).json({
       message: error.message,
       status: "failed",
     });
@@ -190,8 +191,6 @@ export const signOut = async (req, res) => {
     res.status(200).json({
       message: "Logout successful",
     });
-
-
   } catch (error) {
     res.status(500).json({
       message: "Something went wrong",

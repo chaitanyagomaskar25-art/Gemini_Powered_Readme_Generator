@@ -42,8 +42,21 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-connectBD();
+const startServer = async () => {
+    try {
+        await connectBD();
 
+        app.listen(3000, () => {
+            console.log("Server is running on port 3000");
+        });
+
+    } catch (error) {
+        console.error("Server startup failed:", error);
+        process.exit(1);
+    }
+};
+
+startServer();
 
 app.get("/", (req, res) => {
   res.json({
