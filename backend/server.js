@@ -16,13 +16,12 @@ app.use(express.json());
 app.use(cookieParser());
 
 const allowedOrigins = [
-  process.env.FRONTEND_URL,
-  "https://gemini-powered-readme-generator.vercel.app",
-  "https://gemini-powered-readme-generator-wra.vercel.app",
+  "https://gemini-powered-readme-generator-bht.vercel.app",
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
 ].filter(Boolean);
+
 const corsOptions = {
   origin(origin, callback) {
     if (!origin) {
