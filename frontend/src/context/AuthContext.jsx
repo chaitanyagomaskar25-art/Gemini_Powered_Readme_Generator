@@ -8,7 +8,7 @@ import {
 
 export const AuthContext = createContext(null);
 
-const API_URL = "https://gemini-powered-readme-generator-ujr.vercel.app/api/auth";
+const API_URL = "https://gemini-powered-readme-generator-wra.vercel.app/api/auth";
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -80,6 +80,7 @@ export function AuthProvider({ children }) {
 
   return true;
 }
+
 
   async function login(credentials) {
     const response = await fetch(`${API_URL}/login`, {
@@ -166,6 +167,7 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+
 
 export function useAuth() {
   const context = useContext(AuthContext);

@@ -8,7 +8,6 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import GenerateReadme from "./pages/GenerateReadme";
-import Templates from "./pages/Templates";
 import Settings from "./pages/Settings";
 import GitHubImportPage from "./pages/GitHubImportPage";
 import NotFound from "./pages/NotFound";
@@ -59,7 +58,6 @@ function AppRoutes() {
 
         <Route path="/readme/:id/edit" element={<ReadmeEditor />} />
         <Route path="/generate" element={<GenerateReadme />} />
-        <Route path="/templates" element={<Templates />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/github-import" element={<GitHubImportPage />} />
       </Route>

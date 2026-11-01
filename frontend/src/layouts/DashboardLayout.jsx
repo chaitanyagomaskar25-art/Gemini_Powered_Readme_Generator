@@ -41,11 +41,7 @@ const navigation = [
     path: "/github-import",
     icon: GitBranchIcon,
   },
-  {
-    label: "Templates",
-    path: "/templates",
-    icon: BookOpen,
-  },
+  
   {
     label: "Settings",
     path: "/settings",

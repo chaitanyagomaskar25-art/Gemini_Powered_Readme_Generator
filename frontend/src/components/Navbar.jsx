@@ -11,7 +11,6 @@ import {
 const links = [
   { label: "Home", to: "/" },
   { label: "Features", to: "/#features" },
-  { label: "Templates", to: "/templates" },
 ];
 
 export default function Navbar() {

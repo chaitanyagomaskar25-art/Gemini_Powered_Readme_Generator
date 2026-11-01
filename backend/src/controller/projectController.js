@@ -145,10 +145,8 @@ export const updateProject = async (req, res) => {
           readmeContent,
         },
       },
-      {
-        new: true,
-        runValidators: true,
-      }
+        { returnDocument: "after" }
+
     );
 
     if (!project) {

@@ -35,12 +35,7 @@ export default function Footer() {
                 >
                   Generate README
                 </Link>
-                <Link
-                  to="/templates"
-                  className="text-sm text-slate-500 hover:text-indigo-600"
-                >
-                  Templates
-                </Link>
+               
                 <Link
                   to="/dashboard"
                   className="text-sm text-slate-500 hover:text-indigo-600"

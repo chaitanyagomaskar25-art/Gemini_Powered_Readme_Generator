@@ -34,7 +34,7 @@ export default function SignupForm() {
 
     try {
       const response = await fetch(
-       "https://gemini-powered-readme-generator-ujr.vercel.app/api/auth/register",
+       "https://gemini-powered-readme-generator-wra.vercel.app/api/auth/register",
         {
           method: "POST",
           headers: {

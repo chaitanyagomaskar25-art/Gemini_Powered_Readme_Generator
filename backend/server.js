@@ -18,6 +18,8 @@ app.use(cookieParser());
 const allowedOrigins = [
   "https://gemini-powered-readme-generator-4ab.vercel.app",
   "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
 ];
 app.use(
   cors({
@@ -40,5 +42,5 @@ app.use("/api/github", router);
 connectBD();
 
 app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000");
+  console.log("Server is running on https://gemini-powered-readme-generator-wra.vercel.app");
 });

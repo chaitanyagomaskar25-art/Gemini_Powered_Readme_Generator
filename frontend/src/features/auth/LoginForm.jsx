@@ -35,13 +35,13 @@ export default function LoginForm() {
         email: data.email.trim().toLowerCase(),
         password: data.password,
       });
-      
-navigate("/dashboard", replace);
+
+      navigate("/dashboard", replace);
 
     } catch (err) {
       const message = err.message || "Unable to log in. Please try again.";
 
-      setServerError(message);
+      setServerError(message); 
 
       setError("root", {
         type: "server",

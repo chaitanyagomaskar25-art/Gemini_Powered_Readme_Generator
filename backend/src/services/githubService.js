@@ -82,6 +82,25 @@ export async function importRepository(repositoryUrl) {
     .filter((item) => item.type === "blob")
     .map((item) => item.path);
 
+  // Fetch the repository's README when one exists.
+  let readmeContent = "";
+
+  try {
+    const readme = await githubRequest(`${base}/readme`);
+
+    if (
+      readme?.content &&
+      readme.encoding === "base64"
+    ) {
+      readmeContent = Buffer.from(
+        readme.content.replace(/\n/g, ""),
+        "base64",
+      ).toString("utf8");
+    }
+  } catch (error) {
+    // A missing README is not an import failure.
+  }
+
   return {
     name: details.name,
     fullName: details.full_name,
@@ -92,6 +111,7 @@ export async function importRepository(repositoryUrl) {
     defaultBranch: details.default_branch,
     topics: details.topics || [],
     files,
+    readmeContent,
     owner,
     repo,
   };

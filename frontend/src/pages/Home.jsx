@@ -56,12 +56,7 @@ export default function Home() {
               Get started <ArrowRight size={18} />
             </Button>
 
-            <Link
-              to="/templates"
-              className="inline-flex items-center justify-center rounded-lg border border-slate-300 px-5 py-3 font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-900"
-            >
-              Explore templates
-            </Link>
+    
           </div>
 
           <div className="mt-8 flex flex-wrap gap-x-5 gap-y-2 text-sm text-slate-500 dark:text-slate-400">

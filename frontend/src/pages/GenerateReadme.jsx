@@ -1,6 +1,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Sparkles, RotateCcw } from "lucide-react";
+import { useLocation } from "react-router";
 
 import ProjectForm from "../features/readme/ProjectForm";
 import MarkdownEditor from "../features/readme/MarkdownEditor";
@@ -10,6 +11,7 @@ import { readmeService } from "../features/readme/readmeService";
 import { projectService } from "../features/projects/projectService";
 
 export default function GenerateReadme() {
+  const location = useLocation();
   const [markdown, setMarkdown] = useState("");
   const [projectDetails, setProjectDetails] = useState(null);
   const [view, setView] = useState("edit");
@@ -18,6 +20,9 @@ export default function GenerateReadme() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [formKey, setFormKey] = useState(0);
+  const [initialFormValues, setInitialFormValues] = useState({});
+  const [repositoryFiles, setRepositoryFiles] = useState([]);
+  const [repositoryReadme, setRepositoryReadme] = useState("");
 
   const feedbackRef = useRef(null);
 
@@ -31,17 +36,55 @@ export default function GenerateReadme() {
     }
   }, [error, success]);
 
+  // Prefill the form when a GitHub repository is imported.
+  useEffect(() => {
+    const repository = location.state?.repository;
+
+    if (!repository) {
+      return;
+    }
+
+    setInitialFormValues({
+      name: repository.name || "",
+      description: repository.description || "",
+      githubUrl: repository.htmlUrl || "",
+      techStack: repository.language || "",
+    });
+
+    setRepositoryFiles(
+      Array.isArray(repository.files) ? repository.files : [],
+    );
+    setRepositoryReadme(
+      typeof repository.readmeContent === "string"
+        ? repository.readmeContent
+        : "",
+    );
+
+    setFormKey((previousKey) => previousKey + 1);
+  }, [location.state]);
+
   async function handleGenerate(details) {
     setIsGenerating(true);
     setError("");
     setSuccess("");
     setProjectDetails(details);
 
+    const enrichedDetails = {
+      ...details,
+      repositoryFiles:
+        repositoryFiles.length > 0
+          ? repositoryFiles
+          : details.repositoryFiles,
+      readmeContent:
+        repositoryReadme || details.readmeContent || "",
+    };
+
     try {
       const generatedMarkdown =
-        await readmeService.generateReadme(details);
+        await readmeService.generateReadme(enrichedDetails);
 
       setMarkdown(generatedMarkdown);
+      setProjectDetails(enrichedDetails);
       setView("preview");
       setSuccess("README generated successfully! Review it before saving.");
     } catch (err) {
@@ -141,6 +184,7 @@ export default function GenerateReadme() {
               key={formKey}
               onGenerate={handleGenerate}
               isGenerating={isGenerating}
+              initialValues={initialFormValues}
             />
           </section>
 
