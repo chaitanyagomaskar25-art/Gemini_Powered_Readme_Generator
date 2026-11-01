@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const allowedOrigins = [
-  "https://gemini-powered-readme-generator-4ab.vercel.app",
+  "https://gemini-powered-readme-generator-wra.vercel.app",
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
